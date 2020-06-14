@@ -1,0 +1,20 @@
+//ejercicio 1
+@NScriptType ClientScript
+Proceso CREAR orden de compra(auto y refacciones)
+	//pageInit
+	record = scriptContext.currentRecord
+	record.getValue({ fieldId: 'tipo', 'auto y refacciones' })
+	record.getValue({ fieldId: 'moneda', moneda })
+	record.getValue({ fieldId: 'subsidiaria', subsidiaria })
+	record.getValue({ fieldId: 'internalid_auto', internalid_auto })
+	//saveRecord
+	MIENTRAS tenga item de reparacion
+		record.selectNewLine({ sublistId : 'costos_auto'})
+    	record.setCurrentSublistValue({ sublistId: 'costos_auto', fieldId: 'internalid_itemreparacion', value: internalid_itemreparacion})			
+    	record.setCurrentSublistValue({ sublistId: 'costos_auto', fieldId: 'costo_proyectado', value: costo_proyectado})			
+    	record.setCurrentSublistValue({ sublistId: 'costos_auto', fieldId: 'costo_realfinal', value: costo_realfinal})			
+	   	record.commitLine({ sublistId: 'costos_auto' })
+	FIN MIENTRAS
+
+
+

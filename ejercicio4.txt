@@ -1,0 +1,11 @@
+//ejercicio 4
+Reducir tiempo de ejecución
+-En un script UserEvent y en la función afterSubmit se puede realizar
+ la creación de instancias de objetos de reparación y con esto las instancias se realizarán después de ser creada la orden de compra
+ y no interfiere con tiempo de guardado
+-En un script UserEvent y en la función beforeLoad se obtiene los internalidad de los records de auto y objetos de reparación
+y se colocan cada uno en una sublista respectivamente. Así como también los valores de campos que son por defecto
+-Se puede crear las órdenes de compra con información básica y posteriormente se crea un script Scheduled o Map que edite de forma masiva las órdenes de compra y les asigne los autos y refacciones.
+
+Es mejor el escenario 2 debido a que la creación de instancias del objeto Costos Auto toman de 5 a 10 segundo,
+en un caso que un auto tenga 20 refacciones y estas lleguen a tomar 10 segundos en ser generadas, tardaran 3.3 minutos en ser creadas todas. Entonces es mejor que sea creada los Costos Auto en una orden de distinta a la del auto y se cumple con el objetivo de no impactar negativamente en los tiempos de ejecución.

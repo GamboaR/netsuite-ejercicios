@@ -1,0 +1,26 @@
+//ejercicio 2
+PROCESO DE CREAR custom record (auto)
+	recordAuto = record.create({ type: 'auto'})
+	recordAuto = setValue({ fieldId: 'asientos', asientos })
+	recordAuto = setValue({ fieldId: 'descripcion', descripcion })
+	recordAuto = setValue({ fieldId: 'modelo', modelo })
+	recordAuto = setValue({ fieldId: 'marca', marca })
+    recordIdAuto = recordAuto.save();
+@NScriptType ClientScript
+PROCESO CREAR orden de compra(refacciones)
+	//pageInit
+	record = scriptContext.currentRecord;
+	record.setValue({ fieldId: 'tipo', 'refacciones' })
+	record.setValue({ fieldId: 'moneda', moneda })
+	record.setValue({ fieldId: 'subsidiaria', subsidiaria })
+
+	//saveRecord
+	MIENTRAS tenga item de reparacion
+		record.selectNewLine({ sublistId : 'costos_auto'})
+    	record.setCurrentSublistValue({ sublistId: 'costos_auto', fieldId: 'record_id_itemreparacion', value: recordIdItemreparacion})		
+		record.setCurrentSublistValue({  sublistId: 'costos_auto',fieldId: 'record_id_auto', recordIdAuto })
+    	record.setCurrentSublistValue({ sublistId: 'costos_auto', fieldId: 'costo_proyectado', value: costo_proyectado})			
+    	record.setCurrentSublistValue({ sublistId: 'costos_auto', fieldId: 'costo_realfinal', value: costo_realfinal})	
+	   	record.commitLine({ sublistId: 'costos_auto' })
+	FIN MIENTRAS
+FIN DEL PROCESO

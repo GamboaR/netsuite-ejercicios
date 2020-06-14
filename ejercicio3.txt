@@ -1,0 +1,28 @@
+//ejercicio 3
+@NScriptType ClientScript
+PROCESO CREAR orden de compra(auto y refacciones)
+	//pageInit
+	record = scriptContext.currentRecord;
+	record.setValue({ fieldId: 'tipo', 'auto y refacciones' })
+	record.setValue({ fieldId: 'moneda', moneda })
+	record.setValue({ fieldId: 'subsidiaria', subsidiaria })
+
+	MIENTRAS tenga autos
+		record.selectNewLine({ sublistId : 'autos'})
+    	record.setCurrentSublistValue({ sublistId: 'autos', fieldId: 'asientos', value: asientos})		
+    	record.setCurrentSublistValue({ sublistId: 'autos', fieldId: 'costo_proyectado', value: costo_proyectado})			
+    	record.setCurrentSublistValue({ sublistId: 'autos', fieldId: 'modelo', value: modelo})	
+    	record.setCurrentSublistValue({ sublistId: 'autos', fieldId: 'marca', value: marca})	
+	   	record.commitLine({ sublistId: 'autos' })
+	FIN MIENTRAS
+
+	//saveRecord
+	MIENTRAS tenga item de reparacion
+		record.selectNewLine({ sublistId : 'costos_auto'})
+    	record.setCurrentSublistValue({ sublistId: 'costos_auto', fieldId: 'record_id_itemreparacion', value: recordIdItemreparacion})		
+		record.getValue({ fieldId: 'record_id_auto', recordIdAuto })
+    	record.setCurrentSublistValue({ sublistId: 'costos_auto', fieldId: 'costo_proyectado', value: costo_proyectado})			
+    	record.setCurrentSublistValue({ sublistId: 'costos_auto', fieldId: 'costo_realfinal', value: costo_realfinal})	
+	   	record.commitLine({ sublistId: 'costos_auto' })
+	FIN MIENTRAS
+FIN DEL PROCESO
